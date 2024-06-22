@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to Russian</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6; /* Off white/cream background color */
+            overflow-x: hidden;
+        }
+        nav {
+            background-color: #cc0000; /* Red accent color */
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .conjugation {
+            display: none;
+        }
+        .conjugation.active {
+            display: table-row;
+        }
+        .clickable {
+            cursor: pointer;
+        }
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .square {
+            position: absolute;
+            background-color: rgba(0, 0, 255, 0.1); /* Blue semi-transparent squares */
+            animation: float 20s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #cc0000;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; 
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .sample-section {
+            display: none;
+        }
+        .sample-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#alphabet">Alphabet</a>
+    <a href="#verbs">Common Verbs</a>
+    <a href="#words">Common Words</a>
+    <a href="#family">Family</a>
+    <a href="#school">School</a>
+    <a href="#greetings">Greetings</a>
+    <a href="#questions">Questions</a>
+    <a href="#conjugation">Conjugation Rules</a>
+    <a href="#pronouns">Pronouns</a>
+    <a href="#counting">Counting</a>
+    <a href="#cities">Russian Cities/Provinces</a>
+    <a href="#history">Russian History</a>
+    <a href="#leaders">Historical Leaders</a>
+    <a href="#structure">Sentence Structure</a>
+    <a href="#sample">Sample</a>
+</nav>
+
+<div class="content">
+
+    <section id="alphabet">
+        <h1>Russian Alphabet with English Pronunciation</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th></tr>
+            <tr><td>А а</td><td>a in car</td></tr>
+            <tr><td>Б б</td><td>b in bat</td></tr>
+            <tr><td>В в</td><td>v in van</td></tr>
+            <tr><td>Г г</td><td>g in go</td></tr>
+            <tr><td>Д д</td><td>d in dog</td></tr>
+            <tr><td>Е е</td><td>ye in yes</td></tr>
+            <tr><td>Ё ё</td><td>yo in yolk</td></tr>
+            <tr><td>Ж ж</td><td>zh in pleasure</td></tr>
+            <tr><td>З з</td><td>z in zoo</td></tr>
+            <tr><td>И и</td><td>ee in see</td></tr>
+            <tr><td>Й й</td><td>y in boy</td></tr>
+            <tr><td>К к</td><td>k in kite</td></tr>
+            <tr><td>Л л</td><td>l in love</td></tr>
+            <tr><td>М м</td><td>m in man</td></tr>
+            <tr><td>Н н</td><td>n in no</td></tr>
+            <tr><td>О о</td><td>o in not</td></tr>
+            <tr><td>П п</td><td>p in pen</td></tr>
+            <tr><td>Р р</td><td>r in run</td></tr>
+            <tr><td>С с</td><td>s in see</td></tr>
+            <tr><td>Т т</td><td>t in top</td></tr>
+            <tr><td>У у</td><td>oo in food</td></tr>
+            <tr><td>Ф ф</td><td>f in fan</td></tr>
+            <tr><td>Х х</td><td>kh in loch</td></tr>
+            <tr><td>Ц ц</td><td>ts in cats</td></tr>
+            <tr><td>Ч ч</td><td>ch in chat</td></tr>
+            <tr><td>Ш ш</td><td>sh in shut</td></tr>
+            <tr><td>Щ щ</td><td>shch in fresh cheese</td></tr>
+            <tr><td>Ъ ъ</td><td>hard sign</td></tr>
+            <tr><td>Ы ы</td><td>i in ill</td></tr>
+            <tr><td>Ь ь</td><td>soft sign</td></tr>
+            <tr><td>Э э</td><td>e in met</td></tr>
+            <tr><td>Ю ю</td><td>yu in universe</td></tr>
+            <tr><td>Я я</td><td>ya in yard</td></tr>
+        </table>
+    </section>
+
+    <section id="verbs">
+        <h1>Top 50 Common Russian Verbs with English Translations</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>быть</td><td>byt'</td><td>to be</td></tr>
+            <tr><td>говорить</td><td>govorit'</td><td>to speak</td></tr>
+            <tr><td>есть</td><td>yest'</td><td>to eat</td></tr>
+            <tr><td>жить</td><td>zhit'</td><td>to live</td></tr>
+            <tr><td>знать</td><td>znat'</td><td>to know</td></tr>
+            <tr><td>идти</td><td>idti</td><td>to go</td></tr>
+            <tr><td>любить</td><td>lyubit'</td><td>to love</td></tr>
+            <tr><td>мочь</td><td>moch'</td><td>to be able</td></tr>
+            <tr><td>работать</td><td>rabotat'</td><td>to work</td></tr>
+            <tr><td>сказать</td><td>skazat'</td><td>to say</td></tr>
+            <tr><td>слушать</td><td>slushat'</td><td>to listen</td></tr>
+            <tr><td>спать</td><td>spat'</td><td>to sleep</td></tr>
+            <tr><td>стоять</td><td>stoyat'</td><td>to stand</td></tr>
+            <tr><td>хотеть</td><td>khotet'</td><td>to want</td></tr>
+            <tr><td>читать</td><td>chitat'</td><td>to read</td></tr>
+            <tr><td>писать</td><td>pisat'</td><td>to write</td></tr>
+            <tr><td>понимать</td><td>ponimat'</td><td>to understand</td></tr>
+            <tr><td>пить</td><td>pit'</td><td>to drink</td></tr>
+            <tr><td>видеть</td><td>videt'</td><td>to see</td></tr>
+            <tr><td>думать</td><td>dumat'</td><td>to think</td></tr>
+            <tr><td>сидеть</td><td>sidet'</td><td>to sit</td></tr>
+            <tr><td>ждать</td><td>zhdat'</td><td>to wait</td></tr>
+            <tr><td>играть</td><td>igrat'</td><td>to play</td></tr>
+            <tr><td>ходить</td><td>khodit'</td><td>to walk</td></tr>
+            <tr><td>плавать</td><td>plavat'</td><td>to swim</td></tr>
+            <tr><td>бежать</td><td>bezhat'</td><td>to run</td></tr>
+            <tr><td>помнить</td><td>pomnit'</td><td>to remember</td></tr>
+            <tr><td>забывать</td><td>zabyvat'</td><td>to forget</td></tr>
+            <tr><td>вставать</td><td>vstavat'</td><td>to get up</td></tr>
+            <tr><td>приходить</td><td>prikhodit'</td><td>to come</td></tr>
+            <tr><td>уходить</td><td>ukhodit'</td><td>to leave</td></tr>
+            <tr><td>открывать</td><td>otkryvat'</td><td>to open</td></tr>
+            <tr><td>закрывать</td><td>zakryvat'</td><td>to close</td></tr>
+            <tr><td>начинать</td><td>nachinat'</td><td>to start</td></tr>
+            <tr><td>заканчивать</td><td>zakanchivat'</td><td>to finish</td></tr>
+            <tr><td>петь</td><td>pet'</td><td>to sing</td></tr>
+            <tr><td>танцевать</td><td>tantsevat'</td><td>to dance</td></tr>
+        </table>
+    </section>
+
+    <section id="words">
+        <h1>Top 150 Common Russian Words with English Translations</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>и</td><td>i</td><td>and</td></tr>
+            <tr><td>в</td><td>v</td><td>in, at</td></tr>
+            <tr><td>не</td><td>ne</td><td>not</td></tr>
+            <tr><td>на</td><td>na</td><td>on, at</td></tr>
+            <tr><td>я</td><td>ya</td><td>I</td></tr>
+            <tr><td>быть</td><td>byt'</td><td>to be</td></tr>
+            <tr><td>он</td><td>on</td><td>he</td></tr>
+            <tr><td>с</td><td>s</td><td>with, from</td></tr>
+            <tr><td>что</td><td>chto</td><td>what, that</td></tr>
+            <tr><td>а</td><td>a</td><td>and, but</td></tr>
+            <tr><td>весь</td><td>ves'</td><td>all, every</td></tr>
+            <tr><td>это</td><td>eto</td><td>this, that</td></tr>
+            <tr><td>как</td><td>kak</td><td>how, like</td></tr>
+            <tr><td>она</td><td>ona</td><td>she</td></tr>
+            <tr><td>по</td><td>po</td><td>on, along</td></tr>
+            <tr><td>но</td><td>no</td><td>but</td></tr>
+            <tr><td>они</td><td>oni</td><td>they</td></tr>
+            <tr><td>к</td><td>k</td><td>to, towards</td></tr>
+            <tr><td>у</td><td>u</td><td>at, by</td></tr>
+            <tr><td>ты</td><td>ty</td><td>you</td></tr>
+            <tr><td>из</td><td>iz</td><td>from, out of</td></tr>
+            <tr><td>мы</td><td>my</td><td>we</td></tr>
+            <tr><td>за</td><td>za</td><td>behind, for</td></tr>
+            <tr><td>вы</td><td>vy</td><td>you (formal/plural)</td></tr>
+            <tr><td>так</td><td>tak</td><td>so, thus</td></tr>
+            <tr><td>же</td><td>zhe</td><td>same, very</td></tr>
+            <tr><td>от</td><td>ot</td><td>from, of</td></tr>
+            <tr><td>сказать</td><td>skazat'</td><td>to say, to tell</td></tr>
+            <tr><td>этот</td><td>etot</td><td>this</td></tr>
+            <tr><td>который</td><td>kotoryi</td><td>which, who</td></tr>
+            <tr><td>мочь</td><td>moch'</td><td>to be able</td></tr>
+            <tr><td>человек</td><td>chelovek</td><td>person, man</td></tr>
+            <tr><td>о</td><td>o</td><td>about, of</td></tr>
+            <tr><td>один</td><td>odin</td><td>one</td></tr>
+            <tr><td>ещё</td><td>eshche</td><td>still, yet</td></tr>
+            <tr><td>бы</td><td>by</td><td>would</td></tr>
+            <tr><td>такой</td><td>takoi</td><td>such</td></tr>
+            <tr><td>только</td><td>tol'ko</td><td>only, just</td></tr>
+            <tr><td>себя</td><td>sebya</td><td>oneself</td></tr>
+            <tr><td>своё</td><td>svoye</td><td>one's own</td></tr>
+            <tr><td>какой</td><td>kakoi</td><td>which, what</td></tr>
+            <tr><td>когда</td><td>kogda</td><td>when</td></tr>
+            <tr><td>уже</td><td>uzhe</td><td>already</td></tr>
+            <tr><td>для</td><td>dlya</td><td>for</td></tr>
+            <tr><td>вот</td><td>vot</td><td>here, there</td></tr>
+            <tr><td>кто</td><td>kto</td><td>who</td></tr>
+            <tr><td>да</td><td>da</td><td>yes, but</td></tr>
+            <tr><td>говорить</td><td>govorit'</td><td>to speak</td></tr>
+            <tr><td>год</td><td>god</td><td>year</td></tr>
+            <tr><td>знать</td><td>znat'</td><td>to know</td></tr>
+            <tr><td>мой</td><td>moy</td><td>my, mine</td></tr>
+            <tr><td>до</td><td>do</td><td>until, to</td></tr>
+            <tr><td>или</td><td>ili</td><td>or</td></tr>
+            <tr><td>если</td><td>esli</td><td>if</td></tr>
+            <tr><td>его</td><td>yevo</td><td>his</td></tr>
+            <tr><td>её</td><td>yeё</td><td>her</td></tr>
+            <tr><td>жизнь</td><td>zhizn'</td><td>life</td></tr>
+            <tr><td>теперь</td><td>teper'</td><td>now</td></tr>
+            <tr><td>тоже</td><td>tozhe</td><td>also</td></tr>
+            <tr><td>более</td><td>bolee</td><td>more</td></tr>
+            <tr><td>новый</td><td>novyy</td><td>new</td></tr>
+            <tr><td>каждый</td><td>kazhdyy</td><td>every, each</td></tr>
+            <tr><td>день</td><td>den'</td><td>day</td></tr>
+            <tr><td>идти</td><td>idti</td><td>to go</td></tr>
+            <tr><td>там</td><td>tam</td><td>there</td></tr>
+            <tr><td>мужчина</td><td>muzhchina</td><td>man</td></tr>
+            <tr><td>самый</td><td>samyy</td><td>most, the very</td></tr>
+            <tr><td>два</td><td>dva</td><td>two</td></tr>
+            <tr><td>первый</td><td>pervyy</td><td>first</td></tr>
+            <tr><td>другой</td><td>drugoy</td><td>other</td></tr>
+            <tr><td>три</td><td>tri</td><td>three</td></tr>
+            <tr><td>после</td><td>posle</td><td>after</td></tr>
+            <tr><td>под</td><td>pod</td><td>under, below</td></tr>
+            <tr><td>где</td><td>gde</td><td>where</td></tr>
+            <tr><td>делать</td><td>delat'</td><td>to do, to make</td></tr>
+            <tr><td>глаз</td><td>glaz</td><td>eye</td></tr>
+            <tr><td>должен</td><td>dolzhen</td><td>must, should</td></tr>
+            <tr><td>тогда</td><td>togda</td><td>then</td></tr>
+            <tr><td>видеть</td><td>videt'</td><td>to see</td></tr>
+            <tr><td>время</td><td>vremya</td><td>time</td></tr>
+            <tr><td>рука</td><td>ruka</td><td>hand, arm</td></tr>
+            <tr><td>дом</td><td>dom</td><td>house, home</td></tr>
+            <tr><td>слово</td><td>slovo</td><td>word</td></tr>
+            <tr><td>место</td><td>mesto</td><td>place</td></tr>
+            <tr><td>лицо</td><td>litso</td><td>face</td></tr>
+            <tr><td>работа</td><td>rabota</td><td>work</td></tr>
+            <tr><td>совсем</td><td>sovsem</td><td>quite, entirely</td></tr>
+            <tr><td>сторона</td><td>storona</td><td>side</td></tr>
+            <tr><td>даже</td><td>dazhe</td><td>even</td></tr>
+            <tr><td>ваш</td><td>vash</td><td>your (formal/plural)</td></tr>
+            <tr><td>небо</td><td>nebo</td><td>sky</td></tr>
+            <tr><td>вообще</td><td>voobshche</td><td>generally, in general</td></tr>
+            <tr><td>земля</td><td>zemlya</td><td>earth, land</td></tr>
+            <tr><td>девушка</td><td>devushka</td><td>girl</td></tr>
+            <tr><td>старый</td><td>staryy</td><td>old</td></tr>
+            <tr><td>остаться</td><td>ostat'sya</td><td>to stay, remain</td></tr>
+            <tr><td>думать</td><td>dumat'</td><td>to think</td></tr>
+            <tr><td>понять</td><td>ponyat'</td><td>to understand</td></tr>
+            <tr><td>плечо</td><td>plecho</td><td>shoulder</td></tr>
+            <tr><td>мир</td><td>mir</td><td>world, peace</td></tr>
+            <tr><td>час</td><td>chas</td><td>hour</td></tr>
+            <tr><td>жена</td><td>zhena</td><td>wife</td></tr>
+            <tr><td>почему</td><td>pochemu</td><td>why</td></tr>
+            <tr><td>потому что</td><td>potomu chto</td><td>because</td></tr>
+            <tr><td>стать</td><td>stat'</td><td>to become</td></tr>
+            <tr><td>глава</td><td>glava</td><td>head, chapter</td></tr>
+            <tr><td>часть</td><td>chast'</td><td>part</td></tr>
+            <tr><td>дело</td><td>delo</td><td>business, matter</td></tr>
+            <tr><td>душа</td><td>dusha</td><td>soul</td></tr>
+            <tr><td>вечер</td><td>vecher</td><td>evening</td></tr>
+            <tr><td>группа</td><td>gruppa</td><td>group</td></tr>
+            <tr><td>большой</td><td>bol'shoy</td><td>big</td></tr>
+            <tr><td>семья</td><td>sem'ya</td><td>family</td></tr>
+            <tr><td>начать</td><td>nachat'</td><td>to start, begin</td></tr>
+            <tr><td>помнить</td><td>pomnit'</td><td>to remember</td></tr>
+            <tr><td>чувствовать</td><td>chuvstvovat'</td><td>to feel</td></tr>
+            <tr><td>сила</td><td>sila</td><td>strength, force</td></tr>
+            <tr><td>голова</td><td>golova</td><td>head</td></tr>
+            <tr><td>долго</td><td>dolgo</td><td>long time</td></tr>
+            <tr><td>дорога</td><td>doroga</td><td>road</td></tr>
+            <tr><td>говорить</td><td>govorit'</td><td>to speak</td></tr>
+            <tr><td>маленький</td><td>malen'kiy</td><td>small, little</td></tr>
+            <tr><td>лежать</td><td>lezhat'</td><td>to lie (down)</td></tr>
+            <tr><td>рассказ</td><td>rasskaz</td><td>story</td></tr>
+            <tr><td>высокий</td><td>vysokiy</td><td>high, tall</td></tr>
+            <tr><td>раньше</td><td>ran'she</td><td>earlier, before</td></tr>
+            <tr><td>читать</td><td>chitat'</td><td>to read</td></tr>
+            <tr><td>просто</td><td>prosto</td><td>simply</td></tr>
+            <tr><td>вечер</td><td>vecher</td><td>evening</td></tr>
+            <tr><td>имя</td><td>imya</td><td>name</td></tr>
+            <tr><td>мальчик</td><td>mal'chik</td><td>boy</td></tr>
+            <tr><td>ждать</td><td>zhdat'</td><td>to wait</td></tr>
+            <tr><td>успеть</td><td>uspet'</td><td>to have time</td></tr>
+            <tr><td>вместе</td><td>vmeste</td><td>together</td></tr>
+            <tr><td>опять</td><td>opyat'</td><td>again</td></tr>
+            <tr><td>пора</td><td>pora</td><td>time, it’s time</td></tr>
+            <tr><td>игра</td><td>igra</td><td>game</td></tr>
+            <tr><td>иметь</td><td>imet'</td><td>to have</td></tr>
+            <tr><td>пойти</td><td>poyti</td><td>to go</td></tr>
+            <tr><td>вода</td><td>voda</td><td>water</td></tr>
+            <tr><td>сила</td><td>sila</td><td>strength, power</td></tr>
+            <tr><td>система</td><td>sistema</td><td>system</td></tr>
+            <tr><td>вместе</td><td>vmeste</td><td>together</td></tr>
+            <tr><td>вопрос</td><td>vopros</td><td>question</td></tr>
+            <tr><td>процесс</td><td>protsess</td><td>process</td></tr>
+            <tr><td>минута</td><td>minuta</td><td>minute</td></tr>
+        </table>
+    </section>
+
+    <section id="family">
+        <h1>Family Related Words</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>мать (мама)</td><td>mat' (mama)</td><td>mother (mom)</td></tr>
+            <tr><td>отец (папа)</td><td>otets (papa)</td><td>father (dad)</td></tr>
+            <tr><td>родители</td><td>roditeli</td><td>parents</td></tr>
+            <tr><td>брат</td><td>brat</td><td>brother</td></tr>
+            <tr><td>сестра</td><td>sistra</td><td>sister</td></tr>
+            <tr><td>сын</td><td>syn</td><td>son</td></tr>
+            <tr><td>дочь (дочка)</td><td>doch' (dochka)</td><td>daughter</td></tr>
+            <tr><td>бабушка</td><td>babushka</td><td>grandmother</td></tr>
+            <tr><td>дедушка</td><td>dedushka</td><td>grandfather</td></tr>
+            <tr><td>внук</td><td>vnuk</td><td>grandson</td></tr>
+            <tr><td>внучка</td><td>vnuchka</td><td>granddaughter</td></tr>
+            <tr><td>дядя</td><td>dyadya</td><td>uncle</td></tr>
+            <tr><td>тётя</td><td>tyotya</td><td>aunt</td></tr>
+            <tr><td>племянник</td><td>plemyannik</td><td>nephew</td></tr>
+            <tr><td>племянница</td><td>plemyannitsa</td><td>niece</td></tr>
+            <tr><td>жена</td><td>zhena</td><td>wife</td></tr>
+            <tr><td>муж</td><td>muzh</td><td>husband</td></tr>
+            <tr><td>супруг</td><td>suprug</td><td>spouse (male)</td></tr>
+            <tr><td>супруга</td><td>supruga</td><td>spouse (female)</td></tr>
+            <tr><td>кузен</td><td>kuzen</td><td>cousin (male)</td></tr>
+            <tr><td>кузина</td><td>kuzina</td><td>cousin (female)</td></tr>
+            <tr><td>прародители</td><td>praroditeli</td><td>great-grandparents</td></tr>
+            <tr><td>прапрадедушка</td><td>prapradedushka</td><td>great-great-grandfather</td></tr>
+            <tr><td>прапрабабушка</td><td>praprababushka</td><td>great-great-grandmother</td></tr>
+        </table>
+    </section>
+
+    <section id="school">
+        <h1>School Related Words</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>школа</td><td>shkola</td><td>school</td></tr>
+            <tr><td>университет</td><td>universitet</td><td>university</td></tr>
+            <tr><td>учитель</td><td>uchitel'</td><td>teacher</td></tr>
+            <tr><td>ученик</td><td>uchenik</td><td>student (male)</td></tr>
+            <tr><td>ученица</td><td>uchenitsa</td><td>student (female)</td></tr>
+            <tr><td>класс</td><td>klass</td><td>classroom</td></tr>
+            <tr><td>урок</td><td>urok</td><td>lesson</td></tr>
+            <tr><td>домашнее задание</td><td>domashneye zadaniye</td><td>homework</td></tr>
+            <tr><td>книга</td><td>kniga</td><td>book</td></tr>
+            <tr><td>тетрадь</td><td>tetrad'</td><td>notebook</td></tr>
+            <tr><td>ручка</td><td>ruchka</td><td>pen</td></tr>
+            <tr><td>карандаш</td><td>karandash</td><td>pencil</td></tr>
+            <tr><td>стол</td><td>stol</td><td>desk</td></tr>
+            <tr><td>стул</td><td>stul</td><td>chair</td></tr>
+            <tr><td>доска</td><td>doska</td><td>board</td></tr>
+            <tr><td>учебник</td><td>uchebnik</td><td>textbook</td></tr>
+            <tr><td>школьный двор</td><td>shkol'nyy dvor</td><td>school yard</td></tr>
+            <tr><td>учебный предмет</td><td>uchebnyy predmet</td><td>subject</td></tr>
+            <tr><td>экзамен</td><td>ekzamen</td><td>exam</td></tr>
+            <tr><td>знания</td><td>znaniya</td><td>knowledge</td></tr>
+        </table>
+    </section>
+
+    <section id="greetings">
+        <h1>Greetings and Introductions</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>Привет</td><td>Privet</td><td>Hello (informal)</td></tr>
+            <tr><td>Здравствуйте</td><td>Zdravstvuyte</td><td>Hello (formal)</td></tr>
+            <tr><td>Доброе утро</td><td>Dobroye utro</td><td>Good morning</td></tr>
+            <tr><td>Добрый день</td><td>Dobryy den'</td><td>Good afternoon</td></tr>
+            <tr><td>Добрый вечер</td><td>Dobryy vecher</td><td>Good evening</td></tr>
+            <tr><td>Как дела?</td><td>Kak dela?</td><td>How are you? (informal)</td></tr>
+            <tr><td>Как поживаете?</td><td>Kak pozhivayete?</td><td>How are you? (formal)</td></tr>
+            <tr><td>Меня зовут...</td><td>Menya zovut...</td><td>My name is...</td></tr>
+            <tr><td>Как вас зовут?</td><td>Kak vas zovut?</td><td>What is your name? (formal)</td></tr>
+            <tr><td>Как тебя зовут?</td><td>Kak tebya zovut?</td><td>What is your name? (informal)</td></tr>
+            <tr><td>Очень приятно</td><td>Ochen' priyatno</td><td>Nice to meet you</td></tr>
+            <tr><td>Пока</td><td>Poka</td><td>Goodbye (informal)</td></tr>
+            <tr><td>До свидания</td><td>Do svidaniya</td><td>Goodbye (formal)</td></tr>
+            <tr><td>До скорого</td><td>Do skorogo</td><td>See you soon</td></tr>
+        </table>
+    </section>
+
+    <section id="questions">
+        <h1>Common Questions</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>Что это?</td><td>Chto eto?</td><td>What is this?</td></tr>
+            <tr><td>Где ты живёшь?</td><td>Gde ty zhivyosh'?</td><td>Where do you live?</td></tr>
+            <tr><td>Как тебя зовут?</td><td>Kak tebya zovut?</td><td>What is your name?</td></tr>
+            <tr><td>Сколько тебе лет?</td><td>Skol'ko tebe let?</td><td>How old are you?</td></tr>
+            <tr><td>Что ты делаешь?</td><td>Chto ty delayesh'?</td><td>What are you doing?</td></tr>
+            <tr><td>Почему?</td><td>Pochemu?</td><td>Why?</td></tr>
+            <tr><td>Как?</td><td>Kak?</td><td>How?</td></tr>
+            <tr><td>Когда?</td><td>Kogda?</td><td>When?</td></tr>
+            <tr><td>Кто?</td><td>Kto?</td><td>Who?</td></tr>
+            <tr><td>Сколько это стоит?</td><td>Skol'ko eto stoit?</td><td>How much does it cost?</td></tr>
+            <tr><td>Могу я помочь?</td><td>Mogu ya pomoch'?</td><td>Can I help?</td></tr>
+            <tr><td>Где это?</td><td>Gde eto?</td><td>Where is it?</td></tr>
+        </table>
+    </section>
+
+    <section id="conjugation">
+        <h1>Russian Conjugation Rules</h1>
+        <p><strong>Present Tense:</strong></p>
+        <p>For verbs ending in -ть, remove -ть and add the following endings:</p>
+        <ul>
+            <li>я (I) -ю / -у (ya -yu / -u)</li>
+            <li>ты (you) -ешь (ty -esh')</li>
+            <li>он/она/оно (he/she/it) -ет (on/ona/ono -et)</li>
+            <li>мы (we) -ем (my -em)</li>
+            <li>вы (you, formal/plural) -ете (vy -ete)</li>
+            <li>они (they) -ют / -ут (oni -yut / -ut)</li>
+        </ul>
+        <p>Example: работать (to work)</p>
+        <ul>
+            <li>я работаю (I work) - ya rabotayu</li>
+            <li>ты работаешь (you work) - ty rabotayesh'</li>
+            <li>он/она/оно работает (he/she/it works) - on/ona/ono rabotayet</li>
+            <li>мы работаем (we work) - my rabotayem</li>
+            <li>вы работаете (you work) - vy rabotayete</li>
+            <li>они работают (they work) - oni rabotayut</li>
+        </ul>
+
+        <p><strong>Past Tense:</strong></p>
+        <p>For verbs ending in -ть, remove -ть and add the following endings based on gender and number:</p>
+        <ul>
+            <li>Masculine singular -л (l)</li>
+            <li>Feminine singular -ла (la)</li>
+            <li>Neuter singular -ло (lo)</li>
+            <li>Plural -ли (li)</li>
+        </ul>
+        <p>Example: работать (to work)</p>
+        <ul>
+            <li>работал (he worked) - rabotal</li>
+            <li>работала (she worked) - rabotala</li>
+            <li>работало (it worked) - rabotalo</li>
+            <li>работали (they worked) - rabotali</li>
+        </ul>
+
+        <p><strong>Future Tense:</strong></p>
+        <p>There are two types of future tense: simple future and compound future.</p>
+        <p><strong>Simple Future (Perfective verbs):</strong> Conjugate as if it were the present tense.</p>
+        <p>Example: сделать (to do)</p>
+        <ul>
+            <li>я сделаю (I will do) - ya sdelayu</li>
+            <li>ты сделаешь (you will do) - ty sdelayesh'</li>
+            <li>он/она/оно сделает (he/she/it will do) - on/ona/ono sdelayet</li>
+            <li>мы сделаем (we will do) - my sdelayem</li>
+            <li>вы сделаете (you will do) - vy sdelayete</li>
+            <li>они сделают (they will do) - oni sdelayut</li>
+        </ul>
+
+        <p><strong>Compound Future (Imperfective verbs):</strong> Use the present tense of "быть" (to be) + infinitive of the verb.</p>
+        <p>Example: работать (to work)</p>
+        <ul>
+            <li>я буду работать (I will work) - ya budu rabotat'</li>
+            <li>ты будешь работать (you will work) - ty budesh' rabotat'</li>
+            <li>он/она/оно будет работать (he/she/it will work) - on/ona/ono budet rabotat'</li>
+            <li>мы будем работать (we will work) - my budem rabotat'</li>
+            <li>вы будете работать (you will work) - vy budete rabotat'</li>
+            <li>они будут работать (they will work) - oni budut rabotat'</li>
+        </ul>
+    </section>
+
+    <section id="pronouns">
+        <h1>Russian Pronouns</h1>
+        <table>
+            <tr>
+                <th>Russian</th>
+                <th>Pronunciation</th>
+                <th>English</th>
+            </tr>
+            <tr>
+                <td class="clickable">я</td>
+                <td>ya</td>
+                <td>I</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>я работаю (ya rabotayu) - I work</li>
+                        <li>я делаю (ya delayu) - I do</li>
+                        <li>я знаю (ya znayu) - I know</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="clickable">ты</td>
+                <td>ty</td>
+                <td>you (singular, informal)</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>ты работаешь (ty rabotayesh') - you work</li>
+                        <li>ты делаешь (ty delayesh') - you do</li>
+                        <li>ты знаешь (ty znayesh') - you know</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="clickable">он</td>
+                <td>on</td>
+                <td>he</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>он работает (on rabotayet) - he works</li>
+                        <li>он делает (on delayet) - he does</li>
+                        <li>он знает (on znayet) - he knows</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="clickable">она</td>
+                <td>ona</td>
+                <td>she</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>она работает (ona rabotayet) - she works</li>
+                        <li>она делает (ona delayet) - she does</li>
+                        <li>она знает (ona znayet) - she knows</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="clickable">оно</td>
+                <td>ono</td>
+                <td>it</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>оно работает (ono rabotayet) - it works</li>
+                        <li>оно делает (ono delayet) - it does</li>
+                        <li>оно знает (ono znayet) - it knows</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="clickable">мы</td>
+                <td>my</td>
+                <td>we</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>мы работаем (my rabotayem) - we work</li>
+                        <li>мы делаем (my delayem) - we do</li>
+                        <li>мы знаем (my znayem) - we know</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="clickable">вы</td>
+                <td>vy</td>
+                <td>you (plural or formal)</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>вы работаете (vy rabotayete) - you work</li>
+                        <li>вы делаете (vy delayete) - you do</li>
+                        <li>вы знаете (vy znayete) - you know</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="clickable">они</td>
+                <td>oni</td>
+                <td>they</td>
+            </tr>
+            <tr class="conjugation">
+                <td colspan="3">
+                    <strong>Conjugations:</strong>
+                    <ul>
+                        <li>они работают (oni rabotayut) - they work</li>
+                        <li>они делают (oni delayut) - they do</li>
+                        <li>они знают (oni znayut) - they know</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="counting">
+        <h1>Counting</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>один</td><td>odin</td><td>one</td></tr>
+            <tr><td>два</td><td>dva</td><td>two</td></tr>
+            <tr><td>три</td><td>tri</td><td>three</td></tr>
+            <tr><td>четыре</td><td>chetyre</td><td>four</td></tr>
+            <tr><td>пять</td><td>pyat'</td><td>five</td></tr>
+            <tr><td>шесть</td><td>shest'</td><td>six</td></tr>
+            <tr><td>семь</td><td>sem'</td><td>seven</td></tr>
+            <tr><td>восемь</td><td>vosem'</td><td>eight</td></tr>
+            <tr><td>девять</td><td>devyat'</td><td>nine</td></tr>
+            <tr><td>десять</td><td>desyat'</td><td>ten</td></tr>
+            <tr><td>одиннадцать</td><td>odinnadtsat'</td><td>eleven</td></tr>
+            <tr><td>двенадцать</td><td>dvenadtsat'</td><td>twelve</td></tr>
+            <tr><td>тринадцать</td><td>trinadtsat'</td><td>thirteen</td></tr>
+            <tr><td>четырнадцать</td><td>chetyrnadtsat'</td><td>fourteen</td></tr>
+            <tr><td>пятнадцать</td><td>pyatnadtsat'</td><td>fifteen</td></tr>
+            <tr><td>шестнадцать</td><td>shestnadtsat'</td><td>sixteen</td></tr>
+            <tr><td>семнадцать</td><td>semnadtsat'</td><td>seventeen</td></tr>
+            <tr><td>восемнадцать</td><td>vosemnadtsat'</td><td>eighteen</td></tr>
+            <tr><td>девятнадцать</td><td>devyatnadtsat'</td><td>nineteen</td></tr>
+            <tr><td>двадцать</td><td>dvadtsat'</td><td>twenty</td></tr>
+        </table>
+    </section>
+
+    <section id="cities">
+        <h1>Russian Cities/Provinces</h1>
+        <table>
+            <tr><th>Russian</th><th>Pronunciation</th><th>English</th></tr>
+            <tr><td>Москва</td><td>Moskva</td><td>Moscow</td></tr>
+            <tr><td>Санкт-Петербург</td><td>Sankt-Peterburg</td><td>Saint Petersburg</td></tr>
+            <tr><td>Новосибирск</td><td>Novosibirsk</td><td>Novosibirsk</td></tr>
+            <tr><td>Екатеринбург</td><td>Yekaterinburg</td><td>Yekaterinburg</td></tr>
+            <tr><td>Нижний Новгород</td><td>Nizhniy Novgorod</td><td>Nizhny Novgorod</td></tr>
+            <tr><td>Казань</td><td>Kazan'</td><td>Kazan</td></tr>
+            <tr><td>Челябинск</td><td>Chelyabinsk</td><td>Chelyabinsk</td></tr>
+            <tr><td>Омск</td><td>Omsk</td><td>Omsk</td></tr>
+            <tr><td>Самара</td><td>Samara</td><td>Samara</td></tr>
+            <tr><td>Ростов-на-Дону</td><td>Rostov-na-Donu</td><td>Rostov-on-Don</td></tr>
+        </table>
+    </section>
+
+    <section id="history">
+        <h1>Russian History</h1>
+        <p>Russian history spans thousands of years, from the early Slavic tribes to the formation of the Russian state and beyond. Here are some key periods:</p>
+        <ul>
+            <li><strong>Kievan Rus' (882–1240):</strong> The early medieval state that was the precursor to modern Russia, Ukraine, and Belarus.</li>
+            <li><strong>Mongol Invasion (1237–1480):</strong> The period of Mongol domination over the Russian principalities.</li>
+            <li><strong>Muscovy (1283–1547):</strong> The rise of the Grand Duchy of Moscow, which became the dominant Russian principality.</li>
+            <li><strong>Tsardom of Russia (1547–1721):</strong> The period when Russia was ruled by tsars, beginning with Ivan the Terrible.</li>
+            <li><strong>Russian Empire (1721–1917):</strong> The era of imperial expansion and consolidation, starting with Peter the Great and ending with the Russian Revolution.</li>
+            <li><strong>Soviet Union (1922–1991):</strong> The period of communist rule, from the aftermath of the Russian Revolution to the dissolution of the USSR.</li>
+            <li><strong>Russian Federation (1991–present):</strong> The modern state of Russia, following the collapse of the Soviet Union.</li>
+        </ul>
+    </section>
+
+    <section id="leaders">
+        <h1>Historical Leaders</h1>
+        <table>
+            <tr><th>Name</th><th>Period</th><th>Significance</th></tr>
+            <tr><td>Ivan the Terrible</td><td>1533–1584</td><td>The first tsar of Russia, known for his ruthless rule and centralization of power.</td></tr>
+            <tr><td>Peter the Great</td><td>1682–1725</td><td>Modernized Russia and expanded its territory, founded Saint Petersburg.</td></tr>
+            <tr><td>Catherine the Great</td><td>1762–1796</td><td>Expanded the Russian Empire and was a patron of the arts and education.</td></tr>
+            <tr><td>Alexander II</td><td>1855–1881</td><td>Emancipated the serfs and implemented significant reforms.</td></tr>
+            <tr><td>Vladimir Lenin</td><td>1917–1924</td><td>Led the Bolshevik Revolution and founded the Soviet Union.</td></tr>
+            <tr><td>Joseph Stalin</td><td>1924–1953</td><td>Ruled with an iron fist, industrialized the Soviet Union, and led it through WWII.</td></tr>
+            <tr><td>Nikita Khrushchev</td><td>1953–1964</td><td>Initiated the de-Stalinization process and led during the early Cold War.</td></tr>
+            <tr><td>Mikhail Gorbachev</td><td>1985–1991</td><td>Implemented perestroika and glasnost, leading to the end of the Soviet Union.</td></tr>
+        </table>
+    </section>
+
+    <section id="structure">
+        <h1>Sentence Structure Rules</h1>
+        <p>Russian sentence structure can vary, but here are some basic rules:</p>
+        <ul>
+            <li><strong>Subject-Verb-Object (SVO):</strong> This is the most common word order. For example: Я люблю тебя (Ya lyublyu tebya) - I love you.</li>
+            <li><strong>Questions:</strong> Questions often have the same word order as statements but are indicated by intonation. For example: Ты любишь меня? (Ty lyubish' menya?) - Do you love me?</li>
+            <li><strong>Negations:</strong> Negations are formed by placing "не" before the verb. For example: Я не люблю (Ya ne lyublyu) - I don't love.</li>
+            <li><strong>Adjectives:</strong> Adjectives usually come before the nouns they modify. For example: красивая девушка (krasivaya devushka) - beautiful girl.</li>
+            <li><strong>Prepositions:</strong> Prepositions come before their objects. For example: на столе (na stole) - on the table.</li>
+        </ul>
+    </section>
+
+    <section id="sample">
+        <h1>Sample: Communist Manifesto</h1>
+        <button onclick="loadManifesto()">Load the Communist Manifesto</button>
+        <div id="manifesto-content" class="sample-section">
+            <p class="tooltip">Призрак бродит по Европе — призрак коммунизма.
+                <span class="tooltiptext">A specter is haunting Europe — the specter of communism.</span>
+            </p>
+            <p class="tooltip">Все силы старой Европы собрались для священного похода против этого призрака: папа и царь, Меттерних и Гизо, французские радикалы и германские полицейские шпионы.
+                <span class="tooltiptext">All the powers of old Europe have entered into a holy alliance to exorcise this specter: Pope and Tsar, Metternich and Guizot, French Radicals and German police-spies.</span>
+            </p>
+            <p class="tooltip">Где та оппозиционная партия, которую не заклеймили бы ее противники в коммунизме, где та оппозиционная партия, которая, в свою очередь, не отбросила бы обвинительного упрека в коммунизме как против более передовых оппозиционеров, так и против своих реакционных противников?
+                <span class="tooltiptext">Where is the party in opposition that has not been decried as communistic by its opponents in power? Where is the opposition that has not hurled back the branding reproach of communism, against the more advanced opposition parties, as well as against its reactionary adversaries?</span>
+            </p>
+            <!-- Add more paragraphs as needed -->
+        </div>
+    </section>
+
+</div>
+
+<div class="background">
+    <!-- Adding multiple smaller squares with random positions and sizes -->
+    <div class="square" style="left: 10%; top: 20%; width: 20px; height: 20px;"></div>
+    <div class="square" style="left: 70%; top: 40%; width: 25px; height: 25px;"></div>
+    <div class="square" style="left: 30%; top: 80%; width: 15px; height: 15px;"></div>
+    <div class="square" style="left: 90%; top: 10%; width: 30px; height: 30px;"></div>
+    <div class="square" style="left: 50%; top: 60%; width: 20px; height: 20px;"></div>
+    <div class="square" style="left: 20%; top: 30%; width: 18px; height: 18px;"></div>
+    <div class="square" style="left: 60%; top: 70%; width: 22px; height: 22px;"></div>
+    <div class="square" style="left: 40%; top: 20%; width: 25px; height: 25px;"></div>
+    <div class="square" style="left: 80%; top: 50%; width: 15px; height: 15px;"></div>
+    <div class="square" style="left: 30%; top: 10%; width: 30px; height: 30px;"></div>
+    <div class="square" style="left: 70%; top: 90%; width: 20px; height: 20px;"></div>
+</div>
+
+<script>
+    document.querySelectorAll('.clickable').forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.querySelectorAll('.conjugation').forEach(function(conj) {
+                conj.classList.remove('active');
+            });
+            this.nextElementSibling.classList.toggle('active');
+        });
+    });
+
+    function loadManifesto() {
+        document.getElementById('manifesto-content').classList.add('active');
+    }
+</script>
+
+</body>
+</html>
